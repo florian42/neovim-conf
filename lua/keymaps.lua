@@ -16,6 +16,9 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map('n', '<leader>bv', ':vsplit<CR>', { silent = true, noremap = true, desc = 'add vertical split' })
 map('n', '<leader>bh', ':split<CR>', { silent = true, noremap = true, desc = 'add horizontal split' })
+map('n', '<leader>bq', ':q<CR>', { silent = true, noremap = true, desc = 'quit buffer' })
+map('n', '<leader>bS', ':wa<CR>', { silent = true, noremap = true, desc = 'write all buffers' })
+map('n', '<leader>bs', ':wa<CR>', { silent = true, noremap = true, desc = 'write all buffers' })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
