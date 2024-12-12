@@ -54,4 +54,41 @@ return {
       },
     },
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      local configs = require("nvim-treesitter.configs")
+
+      configs.setup({
+        ensure_installed = {
+          "lua",
+          "vim",
+          "vimdoc",
+          "query",
+          "elixir",
+          "javascript",
+          "html",
+          "git_config",
+          "gitcommit",
+          "git_rebase",
+          "gitignore",
+          "gitattributes",
+          "ocaml",
+          "luadoc",
+          "diff",
+          "haskell",
+          "markdown",
+          "markdown_inline",
+          "python",
+          "tsx",
+          "javascript",
+          "typescript",
+        },
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end,
+  },
 }
