@@ -57,6 +57,10 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-context",
+    },
     config = function()
       local configs = require("nvim-treesitter.configs")
 
@@ -203,6 +207,37 @@ return {
           { name = "buffer" },
         }),
       })
+    end,
+  },
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    config = function()
+      -- Better Around/Inside textobjects
+      --
+      -- Examples:
+      --  - va)  - [V]isually select [A]round [)]paren
+      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+      --  - ci'  - [C]hange [I]nside [']quote
+      require("mini.ai").setup({ n_lines = 500 })
+
+      -- Add/delete/replace surroundings (brackets, quotes, etc.)
+      --
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sr)'  - [S]urround [R]eplace [)] [']
+      require("mini.surround").setup()
+
+      -- ... and there is more!
+      --  Check out: https://github.com/echasnovski/mini.nvim
+      -- require('mini.jump').setup() -- Jump to next/previous single character
+      require("mini.cursorword").setup() -- Automatic highlighting of word under cursor
+
+      -- Text edit operators
+      require("mini.operators").setup()
+
+      -- Simple and easy statusline.
+      require("mini.statusline").setup({ use_icons = true })
     end,
   },
 }
