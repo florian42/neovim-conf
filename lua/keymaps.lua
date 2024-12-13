@@ -14,11 +14,11 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 
 -- Buffers
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map('n', '<leader>bv', ':vsplit<CR>', { silent = true, noremap = true, desc = 'add vertical split' })
-map('n', '<leader>bh', ':split<CR>', { silent = true, noremap = true, desc = 'add horizontal split' })
-map('n', '<leader>bq', ':q<CR>', { silent = true, noremap = true, desc = 'quit buffer' })
-map('n', '<leader>bS', ':wa<CR>', { silent = true, noremap = true, desc = 'write all buffers' })
-map('n', '<leader>bs', ':wa<CR>', { silent = true, noremap = true, desc = 'write all buffers' })
+map("n", "<leader>bv", ":vsplit<CR>", { silent = true, noremap = true, desc = "add vertical split" })
+map("n", "<leader>bh", ":split<CR>", { silent = true, noremap = true, desc = "add horizontal split" })
+map("n", "<leader>bq", ":q<CR>", { silent = true, noremap = true, desc = "quit buffer" })
+map("n", "<leader>bS", ":wa<CR>", { silent = true, noremap = true, desc = "write all buffers" })
+map("n", "<leader>bs", ":wa<CR>", { silent = true, noremap = true, desc = "write all buffers" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
@@ -31,10 +31,11 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
-
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
@@ -44,3 +45,43 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+-- toggle options
+local Snacks = require("snacks")
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" })
+  :map("<leader>uc")
+Snacks.toggle
+  .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+  :map("<leader>uA")
+Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+Snacks.toggle.dim():map("<leader>uD")
+Snacks.toggle.animate():map("<leader>ua")
+Snacks.toggle.indent():map("<leader>ug")
+Snacks.toggle.scroll():map("<leader>uS")
+
+
+-- Terminal Mappings
+map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+
+
