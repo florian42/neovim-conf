@@ -234,7 +234,7 @@ return {
       require("mini.cursorword").setup() -- Automatic highlighting of word under cursor
 
       -- Text edit operators
-      require("mini.operators").setup()
+      -- require("mini.operators").setup()
 
       -- Simple and easy statusline.
       require("mini.statusline").setup({ use_icons = true })
