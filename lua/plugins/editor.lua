@@ -134,8 +134,22 @@ return {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
-    dependencies = "rafamadriz/friendly-snippets",
-
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      build = (function()
+        -- Build Step is needed for regex support in snippets.
+        -- This step is not supported in many windows environments.
+        -- Remove the below condition to re-enable on windows.
+        if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+          return
+        end
+        return "make install_jsregexp"
+      end)(),
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets" })
+      end,
+    },
     -- use a release tag to download pre-built binaries
     version = "v0.*",
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
@@ -145,6 +159,7 @@ return {
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       -- 'default' for mappings similar to built-in completion
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -153,6 +168,7 @@ return {
       -- your own keymap.
       keymap = { preset = "default" },
 
+      ---@diagnostic disable-next-line: missing-fields
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
         -- Useful for when your theme doesn't support blink.cmp
@@ -164,6 +180,7 @@ return {
       },
 
       -- experimental signature help support
+      ---@diagnostic disable-next-line: missing-fields
       signature = { enabled = true },
     },
     -- allows extending the providers array elsewhere in your config
