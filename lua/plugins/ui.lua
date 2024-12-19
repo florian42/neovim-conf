@@ -122,6 +122,13 @@ return {
         desc = "Toggle Terminal",
       },
       {
+        "ot",
+        function()
+          Snacks.terminal(nil, { win = { style = "float" } })
+        end,
+        desc = "Open Floating Terminal",
+      },
+      {
         "<c-_>",
         function()
           Snacks.terminal()
