@@ -95,37 +95,36 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {
-      expose_as_code_action = { "remove_unused_imports", "add_missing_imports" },
-      tsserver_file_preferences = { importModuleSpecifierPreference = "non-relative" },
-    },
-    config = function(_, opts)
+    config = function()
       vim.keymap.set(
         "n",
         "<leader>co",
         ":TSToolsRemoveUnusedImports<CR>",
         { noremap = true, silent = true, desc = "Remove unused imports" }
       )
-      require("typescript-tools").setup(opts)
+      require("typescript-tools").setup({
+        expose_as_code_action = { "remove_unused_imports", "add_missing_imports" },
+        tsserver_file_preferences = { importModuleSpecifierPreference = "non-relative" },
+      })
     end,
   },
   { -- Linting
-    'mfussenegger/nvim-lint',
-    event = { 'BufReadPre', 'BufNewFile' },
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local lint = require 'lint'
+      local lint = require("lint")
       lint.linters_by_ft = {
         -- markdown = { 'markdownlint' },
-        typescriptreact = { 'eslint_d' },
-        javascriptreact = { 'eslint_d' },
-        typescript = { 'eslint_d' },
-        javascript = { 'eslint_d' },
+        typescriptreact = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescript = { "eslint_d" },
+        javascript = { "eslint_d" },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:
       -- lint.linters_by_ft = lint.linters_by_ft or {}
-      -- lint.linters_by_ft['markdown'] = { 'markdownlint' }
+      -- lint.linters_by_ft = { 'markdownlint' }
       --
       -- However, note that this will enable a set of default linters,
       -- which will cause errors unless these tools are available:
@@ -156,8 +155,8 @@ return {
 
       -- Create autocommand which carries out the actual linting
       -- on the specified events.
-      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
         group = lint_augroup,
         callback = function()
           -- Only run the linter in buffers that you can modify in order to
