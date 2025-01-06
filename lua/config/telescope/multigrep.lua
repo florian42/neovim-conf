@@ -39,7 +39,7 @@ local live_multigrep = function(opts)
   pickers
     .new(opts, {
       debounce = 100,
-      prompt_title = "Multi Grep (with args)",
+      prompt_title = "Multi Grep `pattern glob`",
       finder = finder,
       previewer = conf.grep_previewer(opts),
       sorter = require("telescope.sorters").empty(),
