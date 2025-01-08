@@ -18,6 +18,21 @@ return {
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       require("lspconfig").lua_ls.setup({ capabilities = capabilities })
+      require("lspconfig").basedpyright.setup({
+        capabilities = capabilities,
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "basic",
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              autoImportCompletions = true,
+              diagnosticsMode = "openFilesOnly",
+            },
+          },
+        },
+      })
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
@@ -103,8 +118,10 @@ return {
         { noremap = true, silent = true, desc = "Remove unused imports" }
       )
       require("typescript-tools").setup({
-        expose_as_code_action = { "remove_unused_imports", "add_missing_imports" },
-        tsserver_file_preferences = { importModuleSpecifierPreference = "non-relative" },
+        settings = {
+          expose_as_code_action = { "remove_unused_imports", "add_missing_imports" },
+          tsserver_file_preferences = { importModuleSpecifierPreference = "non-relative" },
+        },
       })
     end,
   },
