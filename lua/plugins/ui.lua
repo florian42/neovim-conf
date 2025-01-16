@@ -233,4 +233,15 @@ return {
       require("config.telescope.multigrep").setup()
     end,
   },
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { -- Example mapping to toggle outline
+      { "<leader>os", "<cmd>Outline<CR>", desc = "[O]pen [S]ybmols outline" },
+    },
+    opts = {
+      -- Your setup opts here
+    },
+  },
 }
