@@ -177,11 +177,15 @@ return {
           find_files = { theme = "ivy" },
           oldfiles = {
             cwd_only = true,
+            previewer = false,
+            fname_width = 80,
+            theme = "ivy"
           },
           lsp_references = {
             fname_width = 80,
             include_declaration = false,
-            previewer = false,
+            previewer = true,
+            theme = "ivy"
           },
         },
         extensions = {
