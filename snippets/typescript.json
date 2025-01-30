@@ -1,3 +1,4 @@
+
 {
   "Class Definition": {
     "prefix": "class",
@@ -48,5 +49,17 @@
     "prefix": "trycatch",
     "body": ["try {", "\t$0", "} catch (${1:error}) {", "\t", "}"],
     "description": "Try-Catch Statement"
+  },
+  "Fixture Method Template": {
+    "prefix": "fixtureMethod",
+    "body": [
+      "public static ${1:methodName}(props: Partial<${2:TypeName}> = {}): ${2:TypeName} {",
+      "    return defaults(props, {",
+      "        // Add your default props here",
+      "    });",
+      "}"
+    ],
+    "description": "Creates a fixture method for test data."
   }
 }
+
