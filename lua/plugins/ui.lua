@@ -349,6 +349,18 @@ return {
         desc = "Rename File",
       },
       {
+        "<leader>gY",
+        function()
+          Snacks.gitbrowse({
+            open = function(url)
+              vim.fn.setreg("+", url)
+            end,
+            notify = false,
+          })
+        end,
+        desc = "Git Browse (copy)",
+      },
+      {
         "<leader>gB",
         function()
           Snacks.gitbrowse()
