@@ -19,6 +19,37 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       require("lspconfig").lua_ls.setup({ capabilities = capabilities })
       require("lspconfig").ocamllsp.setup({ capabilities = capabilities })
+      require("lspconfig").yamlls.setup({
+        capabilities = capabilities,
+        settings = {
+          yaml = {
+            schemas = {
+              ["https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json"] = "~/source/github.com/einwert/infrastructure",
+            },
+            customTags = {
+              "!fn",
+              "!And",
+              "!If",
+              "!Not",
+              "!Equals",
+              "!Or",
+              "!FindInMap sequence",
+              "!Base64",
+              "!Cidr",
+              "!Ref",
+              "!Ref Scalar",
+              "!Sub",
+              "!Sub sequence",
+              "!GetAtt",
+              "!GetAZs",
+              "!ImportValue",
+              "!Select",
+              "!Split",
+              "!Join sequence",
+            },
+          },
+        },
+      })
       require("lspconfig").basedpyright.setup({
         capabilities = capabilities,
         settings = {
@@ -92,11 +123,12 @@ return {
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {
-        -- markdown = { 'markdownlint' },
         typescriptreact = { "eslint_d" },
         javascriptreact = { "eslint_d" },
         typescript = { "eslint_d" },
         javascript = { "eslint_d" },
+        yaml = { "cfn_lint" },
+        python = { "flake8" }
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
