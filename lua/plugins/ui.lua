@@ -35,7 +35,7 @@ return {
       {
         "<leader>/",
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep({ hidden = true })
         end,
         desc = "Grep",
       },
@@ -49,7 +49,15 @@ return {
       {
         "<leader><space>",
         function()
-          Snacks.picker.smart()
+          Snacks.picker.smart({
+            multi = { "buffers", "recent", "files" },
+            format = "file", -- use `file` format for all sources
+            matcher = {
+              cwd_bonus = true, -- boost cwd matches
+              frecency = true, -- use frecency boosting
+              sort_empty = true, -- sort even when the filter is empty
+            },
+          })
         end,
         desc = "Find Files",
       },
