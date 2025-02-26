@@ -49,14 +49,17 @@ return {
       {
         "<leader><space>",
         function()
-          Snacks.picker.smart({
-            multi = { "buffers", "recent", "files" },
-            format = "file", -- use `file` format for all sources
+          Snacks.picker.recent({
             matcher = {
-              cwd_bonus = true, -- boost cwd matches
-              frecency = true, -- use frecency boosting
-              sort_empty = true, -- sort even when the filter is empty
+              ignorecase = true, -- use ignorecase
+              file_pos = true, -- support patterns like `file:line:col` and `file:line`
+              -- the bonusses below, possibly require string concatenation and path normalization,
+              -- so this can have a performance impact for large lists and increase memory usage
+              cwd_bonus = false, -- give bonus for matching files in the cwd
+              frecency = false, -- frecency bonus
+              history_bonus = true, -- give more weight to chronological order
             },
+            filter = { cwd = true },
           })
         end,
         desc = "Find Files",
