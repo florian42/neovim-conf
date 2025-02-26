@@ -93,13 +93,6 @@ return {
         end,
         desc = "Find Git Files",
       },
-      {
-        "<leader>fr",
-        function()
-          Snacks.picker.recent()
-        end,
-        desc = "Recent",
-      },
       -- git
       {
         "<leader>gc",
