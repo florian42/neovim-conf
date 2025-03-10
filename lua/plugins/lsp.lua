@@ -128,7 +128,7 @@ return {
         typescript = { "eslint_d" },
         javascript = { "eslint_d" },
         yaml = { "cfn_lint" },
-        python = { "flake8" }
+        python = { "flake8" },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
