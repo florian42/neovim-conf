@@ -5,7 +5,7 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
-      dashboard = { enabled = true },
+      dashboard = { enabled = false },
       indent = { enabled = true },
       input = { enabled = true },
       notifier = {
@@ -14,9 +14,9 @@ return {
       },
       picker = { enabled = true },
       quickfile = { enabled = true },
-      scroll = { enabled = true },
+      scroll = { enabled = false },
       statuscolumn = { enabled = true },
-      words = { enabled = true },
+      words = { enabled = false },
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications
