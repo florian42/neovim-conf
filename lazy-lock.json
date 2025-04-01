@@ -25,7 +25,7 @@
   "trouble.nvim": { "branch": "main", "commit": "748ca2789044607f19786b1d837044544c55e80a" },
   "ts-comments.nvim": { "branch": "main", "commit": "79e4337e4231ff8ca33dab85162b5ee8e78f22ce" },
   "tsc.nvim": { "branch": "main", "commit": "5bd25bb5c399b6dc5c00392ade6ac6198534b53a" },
-  "typescript-tools.nvim": { "branch": "master", "commit": "255782c1840b3356f921ce949ace8efd633ba6ac" },
+  "typescript-tools.nvim": { "branch": "master", "commit": "e0887c1e336edbb01243e9f1e60d74b0bc0a2bed" },
   "vim-sleuth": { "branch": "master", "commit": "1d25e8e5dc4062e38cab1a461934ee5e9d59e5a8" },
   "which-key.nvim": { "branch": "main", "commit": "fcbf4eea17cb299c02557d576f0d568878e354a4" }
 }
