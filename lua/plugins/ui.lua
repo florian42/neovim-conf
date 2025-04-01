@@ -147,6 +147,13 @@ return {
         desc = "Registers",
       },
       {
+        "<leader>s/",
+        function()
+          Snacks.picker.search_history()
+        end,
+        desc = "Search History",
+      },
+      {
         "<leader>sa",
         function()
           Snacks.picker.autocmds()
@@ -231,6 +238,13 @@ return {
         desc = "Resume",
       },
       {
+        "<leader>su",
+        function()
+          Snacks.picker.undo()
+        end,
+        desc = "Undo History",
+      },
+      {
         "<leader>sq",
         function()
           Snacks.picker.qflist()
@@ -251,7 +265,6 @@ return {
         end,
         desc = "Projects",
       },
-      -- LSP
       {
         "<leader>st",
         function()
@@ -266,6 +279,7 @@ return {
         end,
         desc = "Todo/Fix/Fixme",
       },
+      -- LSP
       {
         "gd",
         function()
@@ -296,11 +310,18 @@ return {
         desc = "Goto T[y]pe Definition",
       },
       {
-        "<leader>cs",
+        "<leader>cS",
         function()
           Snacks.picker.lsp_symbols()
         end,
         desc = "LSP Symbols",
+      },
+      {
+        "<leader>cs",
+        function()
+          Snacks.picker.lsp_workspace_symbols()
+        end,
+        desc = "LSP Workspace Symbols",
       },
       -- Snacks default:
       {
@@ -457,6 +478,16 @@ return {
       },
     },
     init = function()
+      -- LSP rename
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "OilActionsPost",
+        callback = function(event)
+          if event.data.actions.type == "move" then
+            Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+          end
+        end,
+      })
+      -- Toggle Stuff
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
         callback = function()
@@ -486,17 +517,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    "hedyhli/outline.nvim",
-    lazy = true,
-    cmd = { "Outline", "OutlineOpen" },
-    keys = { -- Example mapping to toggle outline
-      { "<leader>os", "<cmd>Outline<CR>", desc = "[O]pen [S]ybmols outline" },
-    },
-    opts = {
-      -- Your setup opts here
-    },
   },
   {
     "folke/trouble.nvim",
