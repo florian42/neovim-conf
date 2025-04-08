@@ -1,0 +1,16 @@
+{
+  "quoteNote": {
+    "prefix": "quoteNote",
+    "body": [
+      "---",
+      "author: ${1:Esther Nam and Travis Fischer}",
+      "source: ${2:Interview, 1929}",
+      "tags: [${3:programming}]",
+      "date_added: ${4:2025-04-08}",
+      "---",
+      "",
+      "${5:Humans use text. Computers speak bytes.}"
+    ],
+    "description": "Create a quote note"
+  }
+}
