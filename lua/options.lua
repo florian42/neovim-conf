@@ -72,5 +72,5 @@ vim.opt.termguicolors = true -- True color support
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 
 vim.diagnostic.config({
-  virtual_lines = true,
+  virtual_lines = false,
 })
