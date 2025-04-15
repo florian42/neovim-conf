@@ -31,6 +31,12 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+map(
+  "n",
+  "<leader>xa",
+  '<cmd>caddexpr expand("%") .. ":" .. line(".") .. ":" .. getline(".")<cr>',
+  { desc = "Quickfix Add Current Line" }
+)
 -- map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 -- map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
