@@ -227,6 +227,7 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {
       disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
+      enabled = false,
     },
   },
 }
