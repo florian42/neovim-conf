@@ -61,6 +61,7 @@ return {
               useLibraryCodeForTypes = true,
               autoImportCompletions = true,
               diagnosticsMode = "openFilesOnly",
+              reportUnannotatedClassAttribute = false,
             },
           },
         },
