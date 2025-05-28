@@ -56,12 +56,16 @@ return {
         settings = {
           basedpyright = {
             analysis = {
+              diagnosticSeverityOverrides = {
+                reportUnannotatedClassAttribute = "none",
+                reportUnknownMemberType = "none",
+                reportUnknownVariableType = "none",
+              },
               typeCheckingMode = "basic",
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
               autoImportCompletions = true,
               diagnosticsMode = "openFilesOnly",
-              reportUnannotatedClassAttribute = false,
             },
           },
         },
