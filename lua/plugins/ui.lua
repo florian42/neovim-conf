@@ -224,13 +224,6 @@ return {
         desc = "Man Pages",
       },
       {
-        "<leader>sm",
-        function()
-          Snacks.picker.marks()
-        end,
-        desc = "Marks",
-      },
-      {
         "<leader>sR",
         function()
           Snacks.picker.resume()
