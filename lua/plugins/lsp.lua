@@ -20,6 +20,7 @@ return {
       require("lspconfig").lua_ls.setup({ capabilities = capabilities })
       require("lspconfig").ocamllsp.setup({ capabilities = capabilities })
       require("lspconfig").gopls.setup({ capabilities = capabilities })
+      -- require("lspconfig").denols.setup({ capabilities = capabilities })
       require("lspconfig").yamlls.setup({
         capabilities = capabilities,
         settings = {
@@ -108,6 +109,7 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    enabled = true,
     config = function()
       vim.keymap.set(
         "n",
