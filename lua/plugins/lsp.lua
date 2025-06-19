@@ -17,10 +17,14 @@ return {
     },
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local util = require("lspconfig.util")
       require("lspconfig").lua_ls.setup({ capabilities = capabilities })
       require("lspconfig").ocamllsp.setup({ capabilities = capabilities })
       require("lspconfig").gopls.setup({ capabilities = capabilities })
-      -- require("lspconfig").denols.setup({ capabilities = capabilities })
+      require("lspconfig").denols.setup({
+        capabilities = capabilities,
+        root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+      })
       require("lspconfig").yamlls.setup({
         capabilities = capabilities,
         settings = {
@@ -117,11 +121,14 @@ return {
         ":TSToolsRemoveUnusedImports<CR>",
         { noremap = true, silent = true, desc = "Remove unused imports" }
       )
+      local util = require("lspconfig.util")
       require("typescript-tools").setup({
         settings = {
           expose_as_code_action = { "remove_unused_imports", "add_missing_imports" },
           tsserver_file_preferences = { importModuleSpecifierPreference = "non-relative" },
         },
+        single_file_support = false,
+        root_dir = util.root_pattern("tsconfig.json"),
       })
     end,
   },
