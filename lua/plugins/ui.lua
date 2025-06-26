@@ -210,13 +210,6 @@ return {
         desc = "Keymaps",
       },
       {
-        "<leader>sl",
-        function()
-          Snacks.picker.loclist()
-        end,
-        desc = "Location List",
-      },
-      {
         "<leader>sM",
         function()
           Snacks.picker.man()
@@ -271,6 +264,96 @@ return {
           Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
         end,
         desc = "Todo/Fix/Fixme",
+      },
+      -- Language-specific code search shortcuts
+      {
+        "<leader>sl",
+        function()
+          -- Get filetype from current buffer when keymap is executed
+          local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_get_current_buf() })
+          local typescript = "function |class |interface |type |const |let "
+          local javascript = "function |class |const |let "
+          local patterns = {
+            python = "def |class ",
+            javascript = javascript,
+            typescript = typescript,
+            typescriptreact = typescript,
+            lua = "function |local function ",
+            go = "func |type |var |const ",
+            rust = "fn |struct |enum |impl |trait ",
+            java = "class |interface |method |public |private ",
+            c = "void |int |char |struct |typedef ",
+            cpp = "void |int |char |class |struct |namespace ",
+          }
+
+          local pattern = patterns[filetype]
+          if not pattern then
+            vim.notify(
+              "No language symbols pattern defined for filetype: " .. (filetype or "unknown"),
+              vim.log.levels.WARN
+            )
+            return
+          end
+
+          Snacks.picker.grep({ search = pattern })
+        end,
+        desc = "Search Language symbols",
+      },
+      {
+        "<leader>sf",
+        function()
+          -- Get filetype from current buffer when keymap is executed
+          local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_get_current_buf() })
+          local patterns = {
+            python = "def ",
+            javascript = "function ",
+            typescript = "function ",
+            lua = "function ",
+            go = "func ",
+            rust = "fn ",
+            java = "public |private |protected ", -- Java methods with visibility
+            c = "void |int |char |float |double ", -- C function return types
+            cpp = "void |int |char |float |double ",
+          }
+
+          local pattern = patterns[filetype]
+          if not pattern then
+            vim.notify("No functions pattern defined for filetype: " .. (filetype or "unknown"), vim.log.levels.WARN)
+            return
+          end
+
+          Snacks.picker.grep({ search = pattern })
+        end,
+        desc = "Search Functions",
+      },
+      {
+        "<leader>sy",
+        function()
+          -- Get filetype from current buffer when keymap is executed
+          local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_get_current_buf() })
+          local patterns = {
+            python = "class ",
+            javascript = "class ",
+            typescript = "class |interface |type ",
+            go = "type ",
+            rust = "struct |enum |trait ",
+            java = "class |interface ",
+            c = "struct |typedef ",
+            cpp = "class |struct |namespace ",
+          }
+
+          local pattern = patterns[filetype]
+          if not pattern then
+            vim.notify(
+              "No types/classes pattern defined for filetype: " .. (filetype or "unknown"),
+              vim.log.levels.WARN
+            )
+            return
+          end
+
+          Snacks.picker.grep({ search = pattern })
+        end,
+        desc = "Search Types/classes",
       },
       -- LSP
       {

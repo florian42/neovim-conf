@@ -25,6 +25,7 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsea
 
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -37,8 +38,6 @@ map(
   '<cmd>caddexpr expand("%") .. ":" .. line(".") .. ":" .. getline(".")<cr>',
   { desc = "Quickfix Add Current Line" }
 )
--- map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
--- map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })

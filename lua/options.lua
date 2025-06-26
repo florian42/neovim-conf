@@ -26,7 +26,7 @@ end)
 -- Save undo history
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-vim.opt.updatetime = 200 -- Save swap file and trigger CursorHold
+vim.opt.swapfile = false
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -74,3 +74,12 @@ vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in 
 vim.diagnostic.config({
   virtual_lines = false,
 })
+
+vim.o.foldmethod = "expr" -- use tree-sitter for folding method
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevel = 99      -- start editing with all folds opened
+
+
+-- disable some default providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
