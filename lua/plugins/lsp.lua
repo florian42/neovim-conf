@@ -61,16 +61,15 @@ return {
         settings = {
           basedpyright = {
             analysis = {
+              typeCheckingMode = "strict",
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              autoImportCompletions = true,
               diagnosticSeverityOverrides = {
                 reportUnannotatedClassAttribute = "none",
                 reportUnknownMemberType = "none",
                 reportUnknownVariableType = "none",
               },
-              typeCheckingMode = "basic",
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              autoImportCompletions = true,
-              diagnosticsMode = "openFilesOnly",
             },
           },
         },
@@ -98,16 +97,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    "williamboman/mason.nvim",
-    config = true, -- Automatically sets up Mason
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = { "lua_ls" },
-    },
   },
   { "j-hui/fidget.nvim", opts = {} },
   {
@@ -138,10 +127,10 @@ return {
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {
-        typescriptreact = { "eslint_d" },
-        javascriptreact = { "eslint_d" },
-        typescript = { "eslint_d" },
-        javascript = { "eslint_d" },
+        typescriptreact = { "eslint" },
+        javascriptreact = { "eslint" },
+        typescript = { "eslint" },
+        javascript = { "eslint" },
         yaml = { "cfn_lint" },
         python = { "flake8" },
       }
