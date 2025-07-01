@@ -83,3 +83,5 @@ vim.o.foldlevel = 99      -- start editing with all folds opened
 -- disable some default providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+vim.opt.exrc = true -- per project .nvim.lua
