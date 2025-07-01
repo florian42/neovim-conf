@@ -1,32 +1,15 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "saghen/blink.cmp",
-      {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-          library = {
-            -- See the configuration section for more details
-            -- Load luvit types when the `vim.uv` word is found
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          },
-        },
-      },
-    },
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
       local util = require("lspconfig.util")
-      require("lspconfig").lua_ls.setup({ capabilities = capabilities })
-      require("lspconfig").ocamllsp.setup({ capabilities = capabilities })
-      require("lspconfig").gopls.setup({ capabilities = capabilities })
+      require("lspconfig").lua_ls.setup({})
+      require("lspconfig").ocamllsp.setup({})
+      require("lspconfig").gopls.setup({})
       require("lspconfig").denols.setup({
-        capabilities = capabilities,
         root_dir = util.root_pattern("deno.json", "deno.jsonc"),
       })
       require("lspconfig").yamlls.setup({
-        capabilities = capabilities,
         settings = {
           yaml = {
             schemas = {
@@ -57,7 +40,6 @@ return {
         },
       })
       require("lspconfig").basedpyright.setup({
-        capabilities = capabilities,
         settings = {
           basedpyright = {
             analysis = {
@@ -94,6 +76,11 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client:supports_method("textDocument/completion") then
+            vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = false })
+          end
         end,
       })
     end,

@@ -85,3 +85,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 vim.opt.exrc = true -- per project .nvim.lua
+
+
+vim.o.completeopt = "menu,menuone,popup,fuzzy" -- modern completion menu

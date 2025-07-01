@@ -135,59 +135,6 @@ return {
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
   },
   {
-    "saghen/blink.cmp",
-    lazy = false, -- lazy loading handled internally
-    -- optional: provides snippets for the snippet source
-    dependencies = {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = (function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
-        if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-          return
-        end
-        return "make install_jsregexp"
-      end)(),
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets" })
-      end,
-    },
-    -- use a release tag to download pre-built binaries
-    version = "^v1.4",
-    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- see the "default configuration" section below for full documentation on how to define
-      -- your own keymap.
-      keymap = { preset = "default" },
-
-      ---@diagnostic disable-next-line: missing-fields
-      appearance = {
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = "mono",
-      },
-
-      -- experimental signature help support
-      ---@diagnostic disable-next-line: missing-fields
-      signature = { enabled = true },
-    },
-    -- allows extending the providers array elsewhere in your config
-    -- without having to redefine it
-    opts_extend = { "sources.default" },
-  },
-  {
     "echasnovski/mini.nvim",
     version = false,
     config = function()
@@ -209,7 +156,6 @@ return {
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
       -- require('mini.jump').setup() -- Jump to next/previous single character
-      require("mini.cursorword").setup() -- Automatic highlighting of word under cursor
 
       -- Text edit operators
       -- require("mini.operators").setup()
