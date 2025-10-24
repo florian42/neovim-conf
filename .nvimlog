@@ -1,0 +1,4 @@
+WRN 2025-09-25T09:15:33.608 ?.16704    server_start:193: Failed to start server: operation not permitted: /var/folders/1t/tt7nx9t16lxfxxl_zd14920r0000gn/T/nvim.florianaumeier/CPJRMK/nvim.16704.0
+WRN 2025-09-25T09:15:39.339 ?.16739    server_start:193: Failed to start server: operation not permitted: /var/folders/1t/tt7nx9t16lxfxxl_zd14920r0000gn/T/nvim.florianaumeier/3pAJ1Y/nvim.16739.0
+WRN 2025-09-25T09:15:52.292 ?.16779    server_start:193: Failed to start server: operation not permitted: /var/folders/1t/tt7nx9t16lxfxxl_zd14920r0000gn/T/nvim.florianaumeier/YTUY3B/nvim.16779.0
+WRN 2025-09-25T09:17:43.174 ?.16958    server_start:193: Failed to start server: operation not permitted: /var/folders/1t/tt7nx9t16lxfxxl_zd14920r0000gn/T/nvim.florianaumeier/9rv0UN/nvim.16958.0
