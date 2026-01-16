@@ -88,6 +88,7 @@ return {
           "tsx",
           "javascript",
           "typescript",
+          "xml",
         },
         sync_install = false,
         highlight = { enable = true },
@@ -113,6 +114,9 @@ return {
             goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
             goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
           },
+        },
+        fold = {
+          enable = true,
         },
       })
 

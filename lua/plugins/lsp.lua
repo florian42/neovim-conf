@@ -9,6 +9,17 @@ return {
       require("lspconfig").denols.setup({
         root_dir = util.root_pattern("deno.json", "deno.jsonc"),
       })
+      require("lspconfig").ts_ls.setup({
+        root_dir = util.root_pattern("tsconfig.json"),
+        single_file_support = false,
+        settings = {
+          typescript = {
+            preferences = {
+              importModuleSpecifierPreference = "non-relative",
+            },
+          },
+        },
+      })
       require("lspconfig").yamlls.setup({
         settings = {
           yaml = {
@@ -78,6 +89,21 @@ return {
           map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.name == "ts_ls" then
+            map("<leader>co", function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = {
+                    "source.removeUnused.ts",
+                    "source.removeUnused.tsx",
+                    "source.organizeImports.ts",
+                    "source.organizeImports.tsx",
+                  },
+                },
+              })
+            end, "[C]ode Remove Unused Imports")
+          end
           if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = false })
           end
@@ -86,28 +112,6 @@ return {
     end,
   },
   { "j-hui/fidget.nvim", opts = {} },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    enabled = true,
-    config = function()
-      vim.keymap.set(
-        "n",
-        "<leader>co",
-        ":TSToolsRemoveUnusedImports<CR>",
-        { noremap = true, silent = true, desc = "Remove unused imports" }
-      )
-      local util = require("lspconfig.util")
-      require("typescript-tools").setup({
-        settings = {
-          expose_as_code_action = { "remove_unused_imports", "add_missing_imports" },
-          tsserver_file_preferences = { importModuleSpecifierPreference = "non-relative" },
-        },
-        single_file_support = false,
-        root_dir = util.root_pattern("tsconfig.json"),
-      })
-    end,
-  },
   { -- Linting
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
