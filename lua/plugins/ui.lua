@@ -4,6 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      gh = {},
       bigfile = { enabled = true },
       dashboard = { enabled = false },
       indent = { enabled = false },
@@ -12,7 +13,34 @@ return {
         enabled = true,
         timeout = 3000,
       },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        sources = {
+          gh_issue = {
+            -- your gh_issue picker configuration comes here
+            -- or leave it empty to use the default settings
+          },
+          gh_pr = {
+            -- your gh_pr picker configuration comes here
+            -- or leave it empty to use the default settings
+          },
+          files = {
+            hidden = true,
+            ignored = false,
+            exclude = { "node_modules", ".venv" },
+          },
+          grep = {
+            hidden = true,
+            ignored = false,
+            exclude = { "node_modules", ".venv" },
+          },
+          grep_word = {
+            hidden = true,
+            ignored = false,
+            exclude = { "node_modules", ".venv" },
+          },
+        },
+      },
       quickfile = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = true },
@@ -24,6 +52,35 @@ return {
       },
     },
     keys = {
+      -- gh config
+      {
+        "<leader>gi",
+        function()
+          Snacks.picker.gh_issue()
+        end,
+        desc = "GitHub Issues (open)",
+      },
+      {
+        "<leader>gI",
+        function()
+          Snacks.picker.gh_issue({ state = "all" })
+        end,
+        desc = "GitHub Issues (all)",
+      },
+      {
+        "<leader>gp",
+        function()
+          Snacks.picker.gh_pr()
+        end,
+        desc = "GitHub Pull Requests (open)",
+      },
+      {
+        "<leader>gP",
+        function()
+          Snacks.picker.gh_pr({ state = "all" })
+        end,
+        desc = "GitHub Pull Requests (all)",
+      },
       -- Picker config
       {
         "<leader>,",
@@ -651,4 +708,5 @@ return {
       },
     },
   },
+  { "lewis6991/gitsigns.nvim" },
 }
