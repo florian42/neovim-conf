@@ -63,8 +63,6 @@ vim.opt.smartindent = true -- Insert indents automatically
 
 vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 
-vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
-
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
 
 vim.opt.termguicolors = true -- True color support
@@ -88,3 +86,6 @@ vim.opt.exrc = true -- per project .nvim.lua
 
 
 vim.o.completeopt = "menu,menuone,popup,fuzzy" -- modern completion menu
+
+-- v0.12 additions
+vim.o.pumborder = "rounded" -- bordered completion popup menu

@@ -52,20 +52,19 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- diagnostic
-local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+local diagnostic_jump = function(count, severity)
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    vim.diagnostic.jump({ count = count, severity = severity })
   end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "]d", diagnostic_jump(1), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_jump(-1), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_jump(1, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_jump(-1, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_jump(1, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_jump(-1, "WARN"), { desc = "Prev Warning" })
 
 -- Terminal Mappings
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
