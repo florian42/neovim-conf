@@ -6,6 +6,7 @@ require("conform").setup({
     typescript = { "prettierd", "prettier", stop_after_first = true },
     javascriptreact = { "prettierd", "prettier", stop_after_first = true },
     typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+    vue = { "prettierd", "prettier", stop_after_first = true },
     go = { "gofmt" },
     ocaml = { "ocamlformat" },
   },

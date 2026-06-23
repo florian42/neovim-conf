@@ -2,6 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Ensure mise shims are on PATH for GUI/Finder launches
+vim.env.PATH = vim.fn.expand("~/.local/share/mise/shims") .. ":" .. vim.env.PATH
+
 -- Install/declare plugins via vim.pack
 require("config.pack")
 
@@ -20,7 +23,7 @@ require("plugins.formatting")
 require("plugins.filesystem")
 
 -- Native LSP (v0.12) — server configs live in lsp/*.lua
-vim.lsp.enable({ 'lua_ls', 'gopls', 'ts_ls', 'denols', 'yamlls', 'basedpyright', 'ocamllsp' })
+vim.lsp.enable({ 'lua_ls', 'gopls', 'ts_ls', 'vue_ls', 'denols', 'yamlls', 'basedpyright', 'ocamllsp' })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my_lsp_attach", { clear = true }),
