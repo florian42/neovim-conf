@@ -1,0 +1,8 @@
+# Neovim's own log, written into the config dir when nvim is started from here
+.nvimlog
+
+# Local agent/session state
+.claude/settings.local.json
+
+# Per-project exrc scratch (vim.opt.exrc = true)
+.nvim.lua
