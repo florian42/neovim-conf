@@ -1,2 +1,4 @@
 [tools]
-stylua = "latest"
+# Pinned rather than "latest": stylua's output changes between releases, and the
+# pre-commit hook, CI and local runs must agree or they will fight each other.
+stylua = "2.5.2"

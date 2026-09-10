@@ -1,0 +1,48 @@
+#!/bin/sh
+# Keep Lua formatting canonical. Enable with:
+#   git config core.hooksPath .githooks
+#
+# Fully-staged .lua files are formatted in place and re-staged. A file that is
+# staged but *also* has unstaged edits is only checked, never rewritten --
+# reformatting it would sweep those unstaged edits into the commit.
+set -eu
+
+if ! command -v stylua >/dev/null 2>&1; then
+  echo "pre-commit: stylua not on PATH; skipping format check." >&2
+  echo "            run 'mise install' in this repo to get it." >&2
+  exit 0
+fi
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR -- '*.lua')
+[ -n "$staged" ] || exit 0
+
+dirty=$(git diff --name-only -- '*.lua')
+
+reformatted=""
+unclean=""
+
+for f in $staged; do
+  [ -f "$f" ] || continue
+  if printf '%s\n' "$dirty" | grep -qxF -- "$f"; then
+    # staged + unstaged edits: check only
+    if ! stylua --check -- "$f" >/dev/null 2>&1; then
+      unclean="$unclean $f"
+    fi
+  else
+    stylua -- "$f"
+    if ! git diff --quiet -- "$f"; then
+      git add -- "$f"
+      reformatted="$reformatted $f"
+    fi
+  fi
+done
+
+[ -n "$reformatted" ] && echo "pre-commit: stylua reformatted and re-staged:$reformatted"
+
+if [ -n "$unclean" ]; then
+  echo "pre-commit: staged with unstaged edits and not stylua-clean:$unclean" >&2
+  echo "            run 'stylua .', re-stage, and commit again." >&2
+  exit 1
+fi
+
+exit 0

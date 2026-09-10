@@ -1,0 +1,21 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  stylua:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The pre-commit hook is opt-in (it needs `git config core.hooksPath
+      # .githooks` locally), so CI is what actually guarantees main stays
+      # formatted. Version pinned to match mise.toml — stylua output can differ
+      # between releases, and a mismatch would make the hook and CI disagree.
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: 2.5.2
+          args: --check .

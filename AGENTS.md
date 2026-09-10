@@ -24,7 +24,9 @@ lazy.nvim, no mason, and no nvim-lspconfig.
 - `nvim-pack-lock.json`: pinned plugin revisions. **Managed automatically by
   `vim.pack`** — do not hand-edit. The literal quotes in `"version": "'main'"` are
   deliberate (Lua-literal serialization), not corruption.
-- `mise.toml`: local tool version config.
+- `mise.toml`: pinned tool versions (`mise install` to provision).
+- `stylua.toml`: formatting rules. `.githooks/pre-commit` and
+  `.github/workflows/lint.yml` both enforce them.
 - `docs/nvim-maintenance.md`: the maintenance runbook. Read this before doing any
   update, audit, or dependency work.
 - `MIGRATION-PLAN.md`, `plugin-inventory.jsonl`: historical records of the completed
@@ -38,7 +40,15 @@ lazy.nvim, no mason, and no nvim-lspconfig.
   rebuild parsers. **Required after every nvim-treesitter bump** — parser revisions are
   pinned inside the plugin and are invisible to the lockfile.
 - `nvim --headless "+checkhealth" +qa`: run health checks.
-- `stylua .`: format Lua files.
+- `stylua .`: format Lua files. Enforced by CI on every push to `main`.
+
+One-time setup after cloning, to get the auto-formatting pre-commit hook
+(git will not enable a tracked hooks dir on its own):
+
+```sh
+mise install
+git config core.hooksPath .githooks
+```
 
 Interactively: `:lsp` (replaces `:LspInfo`/`:LspRestart`), `:restart`, `:checkhealth`,
 and `<leader>cf` (Conform).
@@ -53,7 +63,13 @@ and `<leader>cf` (Conform).
 - Group related keymaps with clear `desc` labels. Before adding a `<leader>` mapping,
   check it isn't already taken — a later `vim.keymap.set` silently overwrites an
   earlier one.
-- Run `stylua` before committing.
+- Formatting is automated: the pre-commit hook reformats fully-staged Lua files
+  and re-stages them. A file that is staged *and* has unstaged edits is only
+  checked, never rewritten, so the hook can't sweep unstaged work into a commit —
+  it fails and asks you to run `stylua .` yourself.
+- Use `-- stylua: ignore` (on its own line, with no trailing text, or the
+  directive is not recognised) to protect a block where the formatter's output is
+  worse — e.g. the treesitter parser list in `lua/plugins/editor.lua`.
 
 ## Testing Guidelines
 There is no automated test suite. Validate changes by:
