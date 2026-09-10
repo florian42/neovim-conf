@@ -178,7 +178,7 @@ map("n", "gr", function() Snacks.picker.lsp_references() end, { nowait = true, d
 map("n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
 map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
 map("n", "<leader>cS", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
-map("n", "<leader>cs", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols" })
+map("n", "<leader>cw", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols" })
 
 -- Snacks utilities
 map("n", "<leader>z", function() Snacks.zen() end, { desc = "Toggle Zen Mode" })
@@ -202,8 +202,6 @@ map("n", "<leader>gl", function() Snacks.lazygit.log() end, { desc = "Lazygit Lo
 map("n", "<leader>un", function() Snacks.notifier.hide() end, { desc = "Dismiss All Notifications" })
 map("n", "<c-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
 map("n", "<c-_>", function() Snacks.terminal() end, { desc = "which_key_ignore" })
-map({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
-map({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
 map("n", "<leader>N", function()
   Snacks.win({
     file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],

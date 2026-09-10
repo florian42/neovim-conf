@@ -8,7 +8,7 @@ lint.linters_by_ft = {
   python = { "ruff" },
 }
 
--- eslint is opt-in: enable per-session with `:EslintToggle` (or set
+-- eslint_d is opt-in: enable per-session with `:EslintToggle` (or set
 -- `vim.g.eslint_enabled = true`). Defaults to off.
 local eslint_filetypes = {
   typescriptreact = true,
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       return
     end
     if vim.g.eslint_enabled and eslint_filetypes[vim.bo.filetype] then
-      lint.try_lint("eslint")
+      lint.try_lint("eslint_d")
     end
     lint.try_lint()
   end,

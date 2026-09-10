@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(event)
     local map = function(keys, func, desc, mode)
       mode = mode or "n"
-      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+      vim.keymap.set(mode, keys, func, { buf = event.buf, desc = "LSP: " .. desc })
     end
 
     map("<leader>cr", vim.lsp.buf.rename, "[C]ode [R]ename")

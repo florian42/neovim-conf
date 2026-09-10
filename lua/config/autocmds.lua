@@ -8,7 +8,7 @@ end
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    (vim.hl or vim.highlight).on_yank()
+    vim.hl.on_yank()
   end,
 })
 
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd("close")
         pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
       end, {
-        buffer = event.buf,
+        buf = event.buf,
         silent = true,
         desc = "Quit buffer",
       })
