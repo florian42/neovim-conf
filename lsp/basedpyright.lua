@@ -43,7 +43,7 @@ end
 return {
   cmd = { 'basedpyright-langserver', '--stdio' },
   filetypes = { 'python' },
-  root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' },
+  root_markers = { 'pyproject.toml', 'pyrightconfig.json', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', '.git' },
   handlers = {
     ['textDocument/rename'] = function(err, result, ctx, config)
       strip_orphan_annotations(result)

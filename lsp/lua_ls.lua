@@ -5,8 +5,16 @@ return {
   settings = {
     Lua = {
       runtime = { version = 'LuaJIT' },
-      diagnostics = { globals = { 'vim' } },
-      workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
+      diagnostics = { globals = { 'vim', 'Snacks' } },
+      workspace = {
+        checkThirdParty = false,
+        -- VIMRUNTIME alone gives no completion for the plugins this config
+        -- actually calls into; vim.pack installs them under site/pack/core/opt.
+        library = {
+          vim.env.VIMRUNTIME,
+          vim.fs.joinpath(vim.fn.stdpath('data'), 'site', 'pack', 'core', 'opt'),
+        },
+      },
     },
   },
 }
