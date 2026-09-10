@@ -19,9 +19,7 @@ vim.opt.autowrite = true -- Enable auto write
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
-end)
+vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
 -- Save undo history
 vim.opt.undofile = true
@@ -75,15 +73,13 @@ vim.diagnostic.config({
 
 vim.o.foldmethod = "expr" -- use tree-sitter for folding method
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.foldlevel = 99      -- start editing with all folds opened
-
+vim.o.foldlevel = 99 -- start editing with all folds opened
 
 -- disable some default providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 vim.opt.exrc = true -- per project .nvim.lua
-
 
 vim.o.completeopt = "menu,menuone,popup,fuzzy" -- modern completion menu
 

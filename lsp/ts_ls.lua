@@ -1,4 +1,4 @@
-local jsroot = require('util.jsroot')
+local jsroot = require("util.jsroot")
 
 -- Vue SFC support requires @vue/typescript-plugin loaded *into* tsserver, with
 -- vue_ls forwarding tsserver requests to us (see lsp/vue_ls.lua). The plugin is
@@ -11,18 +11,18 @@ local function vue_plugin()
   -- and keeps a `latest` symlink alongside the pinned versions, so prefer that
   -- and it survives version bumps. Globs are ordered most- to least-specific.
   local patterns = {
-    '~/.local/share/mise/installs/npm-vue-typescript-plugin/latest/node_modules/@vue/typescript-plugin',
-    '~/.local/share/mise/installs/npm-vue-typescript-plugin/*/node_modules/@vue/typescript-plugin',
-    '~/.local/share/npm/lib/node_modules/@vue/typescript-plugin',
-    '/opt/homebrew/lib/node_modules/@vue/typescript-plugin',
+    "~/.local/share/mise/installs/npm-vue-typescript-plugin/latest/node_modules/@vue/typescript-plugin",
+    "~/.local/share/mise/installs/npm-vue-typescript-plugin/*/node_modules/@vue/typescript-plugin",
+    "~/.local/share/npm/lib/node_modules/@vue/typescript-plugin",
+    "/opt/homebrew/lib/node_modules/@vue/typescript-plugin",
   }
   for _, pat in ipairs(patterns) do
     for _, dir in ipairs(vim.fn.glob(vim.fn.expand(pat), true, true)) do
       if vim.uv.fs_stat(dir) then
         return {
-          name = '@vue/typescript-plugin',
+          name = "@vue/typescript-plugin",
           location = dir,
-          languages = { 'vue' },
+          languages = { "vue" },
         }
       end
     end
@@ -32,13 +32,11 @@ end
 
 local plugins = {}
 local vue = vue_plugin()
-if vue then
-  table.insert(plugins, vue)
-end
+if vue then table.insert(plugins, vue) end
 
 return {
-  cmd = { 'typescript-language-server', '--stdio' },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   -- Arbitrated against denols; see lua/util/jsroot.lua.
   root_dir = jsroot.node,
   -- Without this a buffer with no project root starts the server anyway with
@@ -46,13 +44,13 @@ return {
   -- vim.lsp.Config field and was silently ignored.
   workspace_required = true,
   init_options = {
-    hostInfo = 'neovim',
+    hostInfo = "neovim",
     plugins = plugins,
   },
   settings = {
     typescript = {
       preferences = {
-        importModuleSpecifierPreference = 'non-relative',
+        importModuleSpecifierPreference = "non-relative",
       },
     },
   },

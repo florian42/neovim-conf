@@ -21,12 +21,8 @@ local eslint_filetypes = {
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
   group = vim.api.nvim_create_augroup("lint", { clear = true }),
   callback = function()
-    if not vim.opt_local.modifiable:get() then
-      return
-    end
-    if vim.g.eslint_enabled and eslint_filetypes[vim.bo.filetype] then
-      lint.try_lint("eslint_d")
-    end
+    if not vim.opt_local.modifiable:get() then return end
+    if vim.g.eslint_enabled and eslint_filetypes[vim.bo.filetype] then lint.try_lint("eslint_d") end
     lint.try_lint()
   end,
 })

@@ -30,6 +30,4 @@ require("oil").setup({
   },
 })
 
-vim.keymap.set("n", "<leader>of", function()
-  require("oil").open()
-end, { desc = "Open Oil" })
+vim.keymap.set("n", "<leader>of", function() require("oil").open() end, { desc = "Open Oil" })

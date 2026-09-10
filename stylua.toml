@@ -1,0 +1,11 @@
+# Matches the style this config is already written in. Notably
+# `collapse_simple_statement` keeps the one-line keymap idiom used throughout
+# lua/plugins/ (`map("n", "<leader>ff", function() Snacks.picker.files() end, ...)`)
+# instead of exploding every one into three lines.
+column_width = 120
+line_endings = "Unix"
+indent_type = "Spaces"
+indent_width = 2
+quote_style = "AutoPreferDouble"
+call_parentheses = "Always"
+collapse_simple_statement = "Always"

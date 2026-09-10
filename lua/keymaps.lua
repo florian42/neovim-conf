@@ -53,9 +53,7 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- diagnostic
 local diagnostic_jump = function(count, severity)
   severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    vim.diagnostic.jump({ count = count, severity = severity })
-  end
+  return function() vim.diagnostic.jump({ count = count, severity = severity }) end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_jump(1), { desc = "Next Diagnostic" })

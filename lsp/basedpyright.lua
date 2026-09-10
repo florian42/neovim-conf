@@ -28,7 +28,9 @@ local function strip_orphan_annotations(workspace_edit)
   if workspace_edit.changeAnnotations then return end
   local function clean(edits)
     if not edits then return end
-    for _, e in ipairs(edits) do e.annotationId = nil end
+    for _, e in ipairs(edits) do
+      e.annotationId = nil
+    end
   end
   if workspace_edit.documentChanges then
     for _, change in ipairs(workspace_edit.documentChanges) do
@@ -36,31 +38,41 @@ local function strip_orphan_annotations(workspace_edit)
     end
   end
   if workspace_edit.changes then
-    for _, edits in pairs(workspace_edit.changes) do clean(edits) end
+    for _, edits in pairs(workspace_edit.changes) do
+      clean(edits)
+    end
   end
 end
 
 return {
-  cmd = { 'basedpyright-langserver', '--stdio' },
-  filetypes = { 'python' },
-  root_markers = { 'pyproject.toml', 'pyrightconfig.json', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', '.git' },
+  cmd = { "basedpyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  root_markers = {
+    "pyproject.toml",
+    "pyrightconfig.json",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    ".git",
+  },
   handlers = {
-    ['textDocument/rename'] = function(err, result, ctx, config)
+    ["textDocument/rename"] = function(err, result, ctx, config)
       strip_orphan_annotations(result)
-      return vim.lsp.handlers['textDocument/rename'](err, result, ctx, config)
+      return vim.lsp.handlers["textDocument/rename"](err, result, ctx, config)
     end,
   },
   settings = {
     basedpyright = {
       analysis = {
-        typeCheckingMode = 'strict',
+        typeCheckingMode = "strict",
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
         autoImportCompletions = true,
         diagnosticSeverityOverrides = {
-          reportUnannotatedClassAttribute = 'none',
-          reportUnknownMemberType = 'none',
-          reportUnknownVariableType = 'none',
+          reportUnannotatedClassAttribute = "none",
+          reportUnknownMemberType = "none",
+          reportUnknownVariableType = "none",
         },
       },
     },

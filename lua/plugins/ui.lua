@@ -57,22 +57,32 @@ map("n", "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, { 
 map("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 map("n", "<leader>/", function() Snacks.picker.grep({ hidden = true }) end, { desc = "Grep" })
 map("n", "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
-map("n", "<leader><space>", function()
-  Snacks.picker.recent({
-    matcher = {
-      ignorecase = true,
-      file_pos = true,
-      cwd_bonus = false,
-      frecency = false,
-      history_bonus = true,
-    },
-    filter = { cwd = true },
-  })
-end, { desc = "Find Files" })
+map(
+  "n",
+  "<leader><space>",
+  function()
+    Snacks.picker.recent({
+      matcher = {
+        ignorecase = true,
+        file_pos = true,
+        cwd_bonus = false,
+        frecency = false,
+        history_bonus = true,
+      },
+      filter = { cwd = true },
+    })
+  end,
+  { desc = "Find Files" }
+)
 
 -- Find
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-map("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
+map(
+  "n",
+  "<leader>fc",
+  function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,
+  { desc = "Find Config File" }
+)
 map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
 map("n", "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 
@@ -104,7 +114,12 @@ map("n", "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix
 map("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
 map("n", "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" })
 map("n", "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "Todo" })
-map("n", "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, { desc = "Todo/Fix/Fixme" })
+map(
+  "n",
+  "<leader>sT",
+  function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end,
+  { desc = "Todo/Fix/Fixme" }
+)
 
 -- Language-specific code search shortcuts
 map("n", "<leader>sl", function()
@@ -202,14 +217,19 @@ map("n", "<leader>gl", function() Snacks.lazygit.log() end, { desc = "Lazygit Lo
 map("n", "<leader>un", function() Snacks.notifier.hide() end, { desc = "Dismiss All Notifications" })
 map("n", "<c-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
 map("n", "<c-_>", function() Snacks.terminal() end, { desc = "which_key_ignore" })
-map("n", "<leader>N", function()
-  Snacks.win({
-    file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-    width = 0.6,
-    height = 0.6,
-    wo = { spell = false, wrap = false, signcolumn = "yes", statuscolumn = " ", conceallevel = 3 },
-  })
-end, { desc = "Neovim News" })
+map(
+  "n",
+  "<leader>N",
+  function()
+    Snacks.win({
+      file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+      width = 0.6,
+      height = 0.6,
+      wo = { spell = false, wrap = false, signcolumn = "yes", statuscolumn = " ", conceallevel = 3 },
+    })
+  end,
+  { desc = "Neovim News" }
+)
 
 -- Snacks toggles
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
@@ -217,7 +237,9 @@ Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+Snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map("<leader>uc")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 Snacks.toggle.inlay_hints():map("<leader>uh")
@@ -235,7 +257,12 @@ require("trouble").setup({})
 map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
 map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
 map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
-map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references / ... (Trouble)" })
+map(
+  "n",
+  "<leader>cl",
+  "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+  { desc = "LSP Definitions / references / ... (Trouble)" }
+)
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 

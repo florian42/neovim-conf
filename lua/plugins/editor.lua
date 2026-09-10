@@ -22,30 +22,31 @@ require("which-key").setup({
       {
         "<leader>b",
         group = "buffer",
-        expand = function()
-          return require("which-key.extras").expand.buf()
-        end,
+        expand = function() return require("which-key.extras").expand.buf() end,
       },
       {
         "<leader>w",
         group = "windows",
         proxy = "<c-w>",
-        expand = function()
-          return require("which-key.extras").expand.win()
-        end,
+        expand = function() return require("which-key.extras").expand.win() end,
       },
       { "gx", desc = "Open with system app" },
     },
   },
 })
 
-vim.keymap.set("n", "<leader>?", function()
-  require("which-key").show({ global = false })
-end, { desc = "Buffer Local Keymaps (which-key)" })
+vim.keymap.set(
+  "n",
+  "<leader>?",
+  function() require("which-key").show({ global = false }) end,
+  { desc = "Buffer Local Keymaps (which-key)" }
+)
 
 -- treesitter
 local ts = require("nvim-treesitter")
 
+-- A flat data list; keep it in columns rather than one entry per line.
+-- stylua: ignore
 local wanted = {
   "lua", "vim", "vimdoc", "query", "elixir", "javascript", "html",
   "git_config", "gitcommit", "git_rebase", "gitignore", "gitattributes",
@@ -57,19 +58,14 @@ local wanted = {
   -- required by Snacks.picker
   "regex",
 }
+
 local installed = require("nvim-treesitter.config").get_installed()
-local to_install = vim.iter(wanted)
-  :filter(function(p) return not vim.tbl_contains(installed, p) end)
-  :totable()
-if #to_install > 0 then
-  ts.install(to_install)
-end
+local to_install = vim.iter(wanted):filter(function(p) return not vim.tbl_contains(installed, p) end):totable()
+if #to_install > 0 then ts.install(to_install) end
 
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("my_treesitter", { clear = true }),
-  callback = function()
-    pcall(vim.treesitter.start)
-  end,
+  callback = function() pcall(vim.treesitter.start) end,
 })
 
 -- treesitter-textobjects

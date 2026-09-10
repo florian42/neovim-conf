@@ -23,7 +23,7 @@ require("plugins.formatting")
 require("plugins.filesystem")
 
 -- Native LSP (v0.12) — server configs live in lsp/*.lua
-vim.lsp.enable({ 'lua_ls', 'gopls', 'ts_ls', 'vue_ls', 'denols', 'yamlls', 'basedpyright', 'ocamllsp' })
+vim.lsp.enable({ "lua_ls", "gopls", "ts_ls", "vue_ls", "denols", "yamlls", "basedpyright", "ocamllsp" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my_lsp_attach", { clear = true }),
@@ -38,19 +38,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client.name == "ts_ls" then
-      map("<leader>co", function()
-        vim.lsp.buf.code_action({
-          apply = true,
-          context = {
-            only = {
-              "source.removeUnused.ts",
-              "source.removeUnused.tsx",
-              "source.organizeImports.ts",
-              "source.organizeImports.tsx",
+      map(
+        "<leader>co",
+        function()
+          vim.lsp.buf.code_action({
+            apply = true,
+            context = {
+              only = {
+                "source.removeUnused.ts",
+                "source.removeUnused.tsx",
+                "source.organizeImports.ts",
+                "source.organizeImports.tsx",
+              },
             },
-          },
-        })
-      end, "[C]ode Remove Unused Imports")
+          })
+        end,
+        "[C]ode Remove Unused Imports"
+      )
     end
     if client and client:supports_method("textDocument/completion") then
       vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = false })

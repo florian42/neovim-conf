@@ -1,15 +1,11 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("my_neovim_" .. name, { clear = true })
-end
+local function augroup(name) return vim.api.nvim_create_augroup("my_neovim_" .. name, { clear = true }) end
 
 -- Following cmds are taken from https://github.com/LazyVim/LazyVim/blob/20eff4fc3f55fbeb1e415f0cc5a2d1f3019e5da6/lua/lazyvim/config/autocmds.lua#L17
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
-  callback = function()
-    vim.hl.on_yank()
-  end,
+  callback = function() vim.hl.on_yank() end,
 })
 
 -- resize splits if window got resized
@@ -53,9 +49,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = { "man" },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-  end,
+  callback = function(event) vim.bo[event.buf].buflisted = false end,
 })
 
 -- wrap and check for spell in text filetypes
@@ -72,7 +66,5 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
-  callback = function()
-    vim.opt_local.conceallevel = 0
-  end,
+  callback = function() vim.opt_local.conceallevel = 0 end,
 })

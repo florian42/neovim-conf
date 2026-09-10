@@ -1,10 +1,10 @@
-local jsroot = require('util.jsroot')
+local jsroot = require("util.jsroot")
 
 return {
-  cmd = { 'deno', 'lsp' },
+  cmd = { "deno", "lsp" },
   -- Deno emits ANSI colour codes into LSP messages unless told not to.
   cmd_env = { NO_COLOR = true },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   -- Arbitrated against ts_ls; see lua/util/jsroot.lua.
   root_dir = jsroot.deno,
   workspace_required = true,
@@ -13,7 +13,7 @@ return {
       enable = true,
       suggest = {
         imports = {
-          hosts = { ['https://deno.land'] = true },
+          hosts = { ["https://deno.land"] = true },
         },
       },
     },
