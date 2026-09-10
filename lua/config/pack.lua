@@ -7,14 +7,11 @@ vim.pack.add({
   { src = gh('nvim-treesitter/nvim-treesitter-textobjects'), version = 'main' },
   gh('nvim-treesitter/nvim-treesitter-context'),
   gh('folke/todo-comments.nvim'),
-  gh('nvim-lua/plenary.nvim'),
   gh('tpope/vim-sleuth'),
-  gh('echasnovski/mini.nvim'),
+  gh('nvim-mini/mini.nvim'),
 
   -- Filesystem
-  gh('echasnovski/mini.icons'),
   gh('stevearc/oil.nvim'),
-  { src = gh('ThePrimeagen/harpoon'), version = 'harpoon2' },
 
   -- Formatting
   gh('stevearc/conform.nvim'),

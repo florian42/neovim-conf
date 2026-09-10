@@ -51,6 +51,11 @@ local wanted = {
   "git_config", "gitcommit", "git_rebase", "gitignore", "gitattributes",
   "ocaml", "luadoc", "diff", "haskell", "markdown", "markdown_inline",
   "python", "tsx", "typescript", "xml", "go",
+  -- filetypes this config configures an LSP, formatter or linter for, and
+  -- which were previously only present by accident of a manual install
+  "yaml", "json", "toml", "bash", "css", "vue",
+  -- required by Snacks.picker
+  "regex",
 }
 local installed = require("nvim-treesitter.config").get_installed()
 local to_install = vim.iter(wanted)

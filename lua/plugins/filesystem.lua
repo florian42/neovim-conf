@@ -1,4 +1,4 @@
--- mini.icons (dependency for oil)
+-- mini.icons (icon provider for oil; ships inside mini.nvim)
 require("mini.icons").setup({})
 
 -- oil.nvim
@@ -33,16 +33,3 @@ require("oil").setup({
 vim.keymap.set("n", "<leader>of", function()
   require("oil").open()
 end, { desc = "Open Oil" })
-
--- harpoon
-local harpoon = require("harpoon")
-harpoon.setup()
-
-vim.keymap.set("n", "<leader>ma", function() harpoon:list():add() end, { desc = "Harpoon add mark" })
-vim.keymap.set("n", "<leader>sm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "[S]earch Harpoon" })
-vim.keymap.set("n", "<leader>mh", function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
-vim.keymap.set("n", "<leader>mj", function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
-vim.keymap.set("n", "<leader>mk", function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
-vim.keymap.set("n", "<leader>ml", function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
-vim.keymap.set("n", "<leader>mp", function() harpoon:list():prev() end, { desc = "Harpoon previous" })
-vim.keymap.set("n", "<leader>mn", function() harpoon:list():next() end, { desc = "Harpoon next" })
